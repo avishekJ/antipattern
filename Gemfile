@@ -43,3 +43,8 @@ group :development, :test do
   gem 'spring'
 end
 
+#To use haml format
+gem 'haml'
+
+#To use haml generator
+gem 'haml-rails'
