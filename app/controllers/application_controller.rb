@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  #before_action :authenticate_author!
+
+  before_filter :custom_auth
 
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
@@ -22,6 +25,18 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
     headers['Access-Control-Max-Age'] = '1728000'
+  end
+
+  private
+
+  def custom_auth
+    if params.has_key?("key")
+      if params[:key]!= "ABLOG-4-DEV-2015"
+        render :json => {:error =>"Authentication failed."}, :status => 401
+      end
+    else
+       authenticate_author!
+    end
   end
 
 end

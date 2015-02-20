@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @subject.name
+%p
+  %b Position:
+  = @subject.position
+%p
+  %b Visible:
+  = @subject.visible
+
+= link_to 'Edit', edit_subject_path(@subject)
+\|
+= link_to 'Back', subjects_path
