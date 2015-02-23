@@ -4,11 +4,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.get_posts_by_author(current_author.id)  if current_author?
-    _posts_json = Post.all
+    @posts = Post.get_posts_by_author(current_author.id)  if current_author.present?
+    @posts_json = Post.all
     respond_to do |format|
       format.html #index.html.haml
-      format.json { render json: _posts_injson }
+      format.json { render json: @posts_json }
 
     end
   end
