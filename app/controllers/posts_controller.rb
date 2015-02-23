@@ -5,6 +5,12 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.get_posts_by_author(current_author.id)
+    _posts_json = Post.all
+    respond_to do |format|
+      format.html #index.html.haml
+      format.json { render json: _posts_injson }
+
+    end
   end
 
   # GET /posts/1
