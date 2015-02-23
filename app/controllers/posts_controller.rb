@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.get_posts_by_author(current_author.id)
+    @posts = Post.get_posts_by_author(current_author.id)  if current_author?
     _posts_json = Post.all
     respond_to do |format|
       format.html #index.html.haml
