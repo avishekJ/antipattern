@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %title Blogapp
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default
+      .container-fluid
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %a.navbar-brand{:href => "#{root_path}"} BlogAdmin
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li{class: current_page?(posts_path) && 'active'}
+              =link_to :Posts, posts_path
+            %li{class: current_page?(categories_path) && 'active'}
+              =link_to :Category, categories_path
+            %li{class: current_page?(subjects_path) && 'active'}
+              =link_to :Subject, subjects_path
+          %ul.nav.navbar-nav.navbar-right
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                = current_author.email
+                %span.caret
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  %a{:href => "#"} Profile
+                %li.divider
+                %li= link_to "Sign out", destroy_author_session_path, :method => :delete
+        / /.navbar-collapse
+      / /.container-fluid
+    %div.col-md-8.col-md-offset-2
+      = yield
