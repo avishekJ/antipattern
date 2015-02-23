@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
   private
 
   def custom_auth
-    if params.has_key?("key")
-      if params[:key]!= "ABLOG-4-DEV-2015"
-        render :json => {:error =>"Authentication failed."}, :status => 401
+    if params.has_key?("sk")
+      if params[:sk]!= "abLogfOrdEvbYavIshEkjAnatWentyfIFteEn"
+        render :json => {:error =>"You need to sign in or sign up before continuing."}, :status => 401
       end
     else
        authenticate_author!
