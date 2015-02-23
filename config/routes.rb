@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+  get 'home/dashboard'
+
+  devise_for :authors
+  resources :subjects
+
+  resources :categories
+
   resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
