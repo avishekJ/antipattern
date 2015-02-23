@@ -1,6 +1,7 @@
-%h1 Listing posts
-
-%table
+%h1 
+  Listing posts
+  = link_to 'New Post', new_post_path, :class=>"btn btn-xs btn-primary"
+%table.table.table-hover
   %thead
     %tr
       %th Title
@@ -16,7 +17,7 @@
     - @posts.each do |post|
       %tr
         %td= post.title
-        %td= post.content
+        %td= post.content.html_safe
         %td= post.author_id
         %td= post.visible
         %td= post.category_id
@@ -26,4 +27,4 @@
 
 %br
 
-= link_to 'New Post', new_post_path
+

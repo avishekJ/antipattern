@@ -14,9 +14,9 @@
     = f.text_area :description
   .field
     = f.label :subject_id
-    = f.number_field :subject_id
+    = f.select :subject_id, options_for_select(@subjects.map{ |sb| [sb.name, sb.id] }), :required=>true     
   .field
     = f.label :parent_id
-    = f.number_field :parent_id
+    = f.select :parent_id, options_for_select(@categories.map{ |cat| [cat.name, cat.id] }), { include_blank: "None"}     
   .actions
     = f.submit 'Save'

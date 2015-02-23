@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.get_posts_by_author(current_author.id)
   end
 
   # GET /posts/1
@@ -15,6 +15,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @categories = Category.all
+    @authors = Author.all
   end
 
   # GET /posts/1/edit
@@ -25,7 +27,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post[:author_id] = current_author.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }

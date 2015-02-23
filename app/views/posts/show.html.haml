@@ -5,16 +5,17 @@
   = @post.title
 %p
   %b Content:
-  = @post.content
+  %br
+  = @post.content.html_safe
 %p
   %b Author:
-  = @post.author_id
+  = @post.author_email
 %p
   %b Visibility:
   = @post.visible
 %p
   %b Category:
-  = @post.category_id
+  = @post.category_name
 
 = link_to 'Edit', edit_post_path(@post)
 \|

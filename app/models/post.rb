@@ -3,9 +3,16 @@ class Post < ActiveRecord::Base
 	belongs_to :category
 	belongs_to :author
 
-	before_validation :add_default_permalink
+	delegate	:name,
+						:description,
+						:to => :category,
+						:prefix => true
 
-  after_destroy :delete_related_posts
+  delegate  :email,
+            :to => :author,
+            :prefix => true			
+
+	before_validation :add_default_permalink
 
 	# => Model validations
 	validates :title, :presence => true,
@@ -16,11 +23,13 @@ class Post < ActiveRecord::Base
 	validates :author_id, :presence => true								
 	validates :category_id, :presence => true
 
+	scope :get_posts_by_author, lambda {|auth_id|where(["author_id=?", auth_id])}
+
 	private
 
   def add_default_permalink
     if permalink.blank?
-      self.permalink = "#{author_id}-#{title.parameterize}"
+      self.permalink = "#{title.parameterize}-#{author_id}-#{Time.now.to_i}"
     end
   end
 

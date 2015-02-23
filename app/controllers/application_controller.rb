@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   #before_action :authenticate_author!
+  layout :layout_by_resource
 
   before_filter :custom_auth
 
@@ -39,4 +40,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def layout_by_resource
+    if devise_controller? && resource_name == :author && (action_name == 'new' || action_name == 'unregistered')
+      "login"
+    else
+      "application"
+    end
+  end
 end
