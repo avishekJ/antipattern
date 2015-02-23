@@ -48,3 +48,12 @@ gem 'haml'
 
 #To use haml generator
 gem 'haml-rails'
+
+gem 'devise'
+
+#To use wysihtml5 editor
+#gem 'bootstrap-wysihtml5-rails', '~> 0.3.3.6'
+# gem 'mercury-rails'
+gem 'bootsy'
+
+gem 'bootstrap-sass', '~> 3.3.3'
